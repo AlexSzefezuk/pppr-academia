@@ -93,6 +93,23 @@ const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
   )
 }
 
+const Footer = ({ items }) => {
+  const numberOfItems = items.length
+  const numberOfSavedItems = items.filter((item) => item.saved).length
+  const percentOfSavedItems = Math.floor(
+    (numberOfSavedItems / numberOfItems) * 100,
+  )
+  const SingularOrPlural = numberOfItems === 1 ? true : false
+
+  return (
+    <div className=" text-white flex items-center justify-center font-semibold text-2xl w-full h-28 bg-[#4B527E]">
+      <p>{`Você tem ${numberOfItems} ite${
+        SingularOrPlural ? "m" : "ns"
+      } e já guardou ${numberOfSavedItems} (${percentOfSavedItems}%)`}</p>
+    </div>
+  )
+}
+
 const App = () => {
   const [items, setItems] = useState([])
   const handleItemsAdd = (newItem) => setItems((i) => [...i, newItem])
@@ -115,6 +132,7 @@ const App = () => {
         onSaveItem={handleSaveItem}
         onItemRemove={removeItem}
       />
+      <Footer items={items} />
     </main>
   )
 }
