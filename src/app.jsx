@@ -58,7 +58,7 @@ const Form = ({ onItemsChange }) => {
 
 const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
   return (
-    <div className="w-full bg-[#E5C3A7]">
+    <div className="w-full flex-1 bg-[#E5C3A7]">
       <div className="flex justify-center items-center gap-12 flex-wrap mx-auto max-w-7xl text-white py-9">
         {items.map((item) => (
           <div
@@ -102,7 +102,7 @@ const Footer = ({ items }) => {
   const SingularOrPlural = numberOfItems === 1 ? true : false
 
   return (
-    <div className=" text-white flex items-center justify-center font-semibold text-2xl w-full h-28 bg-[#4B527E]">
+    <div className=" text-white flex items-center justify-center font-semibold text-2xl w-full min-h-28 bg-[#4B527E]">
       <p>
         {numberOfItems === 0
           ? "Você tem 0 itens na lista"
@@ -128,7 +128,7 @@ const App = () => {
     setItems((i) => i.filter((item) => item.id !== itemId))
 
   return (
-    <main>
+    <main className="flex flex-col h-dvh">
       <Header />
       <Form onItemsChange={handleItemsAdd} />
       <ItemsList
