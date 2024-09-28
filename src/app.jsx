@@ -1,8 +1,16 @@
-const Form = () => {
+import { useState } from "react"
+
+const Form = ({ onItemsChange }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
+
     const { number, item } = e.target
-    console.log(number.value, item.value)
+
+    onItemsChange({
+      id: crypto.randomUUID(),
+      number: number.value,
+      item: item.value,
+    })
   }
 
   return (
@@ -38,10 +46,15 @@ const Form = () => {
   )
 }
 
-const App = () => (
-  <main>
-    <Form />
-  </main>
-)
+const App = () => {
+  const [items, setItems] = useState([])
+  const handleItemsAdd = (newItem) => setItems((i) => [...i, newItem])
+
+  return (
+    <main>
+      <Form onItemsChange={handleItemsAdd} />
+    </main>
+  )
+}
 
 export { App }
