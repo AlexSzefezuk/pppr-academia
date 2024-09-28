@@ -49,7 +49,7 @@ const Form = ({ onItemsChange }) => {
 
 const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
   return (
-    <div className="w-full h-96 bg-[#E5C3A7]">
+    <div className="w-full h-screen bg-[#E5C3A7]">
       <div className="flex justify-center items-center gap-12 flex-wrap mx-auto max-w-7xl text-white py-9">
         {items.map((item) => (
           <div
