@@ -24,14 +24,14 @@ const Form = ({ onItemsChange }) => {
           O que você precisa guardar?
         </p>
         <input
-          className="bg-[#7D81AE] py-3 px-2 w-20 rounded-lg outline-none text-center text-lg placeholder-gray-200"
+          className="bg-[#7D81AE] py-3 px-2 w-20 rounded-lg outline-none text-center text-lg placeholder-gray-300/80"
           name="number"
           type="Number"
           min={1}
-          placeholder="2"
+          placeholder="1"
         />
         <input
-          className="bg-[#7D81AE] py-3 px-2 w-52 rounded-lg outline-none text-left text-lg placeholder-gray-200"
+          className="bg-[#7D81AE] py-3 px-2 w-52 rounded-lg outline-none text-left text-lg placeholder-gray-300/80"
           name="item"
           type="text"
           placeholder="Nome do item"
@@ -59,7 +59,7 @@ const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
             <input
               type="checkbox"
               className="size-5 hover: cursor-pointer"
-              onClick={() => onSaveItem(item)}
+              onClick={() => onSaveItem(item.id)}
             />
             <p className={item.saved && "font-normal text-[#5f68a0]"}>
               {item.number}
@@ -87,17 +87,15 @@ const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
 const App = () => {
   const [items, setItems] = useState([])
   const handleItemsAdd = (newItem) => setItems((i) => [...i, newItem])
-  const handleSaveItem = (item) =>
+  const handleSaveItem = (itemId) =>
     setItems((i) =>
-      i.map((i) => (i.id === item.id ? { ...item, saved: !item.saved } : item)),
+      i.map((item) =>
+        item.id === itemId ? { ...item, saved: !item.saved } : item,
+      ),
     )
-  // const removeItem = (itemId = setItems((i) =>
-  //   i.filter((item) => item.id !== itemId),
-  // ))
 
-  const removeItem = (itemId) => {
+  const removeItem = (itemId) =>
     setItems((i) => i.filter((item) => item.id !== itemId))
-  }
 
   return (
     <main>
