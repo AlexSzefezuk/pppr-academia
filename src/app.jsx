@@ -38,12 +38,14 @@ const Form = ({ onItemsChange }) => {
           type="Number"
           min={1}
           placeholder="1"
+          required
         />
         <input
           className="bg-[#7D81AE] py-3 px-2 w-52 rounded-lg outline-none text-left text-lg placeholder-gray-300/80"
           name="item"
           type="text"
           placeholder="Nome do item"
+          required
         />
         <button
           className="py-3 px-2 w-36 bg-[#FF6086] rounded-lg hover:bg-[#fc446f] text-lg font-bold"
