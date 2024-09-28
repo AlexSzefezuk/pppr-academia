@@ -10,6 +10,7 @@ const Form = ({ onItemsChange }) => {
       id: crypto.randomUUID(),
       number: number.value,
       item: item.value,
+      saved: false,
     })
   }
 
@@ -46,18 +47,30 @@ const Form = ({ onItemsChange }) => {
   )
 }
 
-const ItemsList = ({ items }) => {
+const ItemsList = ({ items, onSaveItem }) => {
   return (
     <div className="w-full h-96 bg-[#E5C3A7]">
       <div className="flex justify-center items-center gap-12 flex-wrap mx-auto max-w-7xl text-white py-9">
         {items.map((item) => (
           <div
             key={item.id}
-            className="flex gap-2 text-xl text-[#4B527E] items-center font-medium"
+            className="flex gap-2 text-xl text-[#4B527E] items-center font-medium "
           >
-            <input type="checkbox" className="size-5" />
-            <p>{item.number}</p>
-            <p>{item.item}</p>
+            <input
+              type="checkbox"
+              className="size-5"
+              onClick={() => onSaveItem(item)}
+            />
+            <p className={item.saved && "font-normal text-[#5f68a0]"}>
+              {item.number}
+            </p>
+            <p
+              className={
+                item.saved && "line-through font-normal text-[#5f68a0]"
+              }
+            >
+              {item.item}
+            </p>
             <span>❌</span>
           </div>
         ))}
@@ -69,11 +82,15 @@ const ItemsList = ({ items }) => {
 const App = () => {
   const [items, setItems] = useState([])
   const handleItemsAdd = (newItem) => setItems((i) => [...i, newItem])
+  const handleSaveItem = (item) =>
+    setItems((i) =>
+      i.map((i) => (i.id === item.id ? { ...item, saved: !item.saved } : item)),
+    )
 
   return (
     <main>
       <Form onItemsChange={handleItemsAdd} />
-      <ItemsList items={items} />
+      <ItemsList items={items} onSaveItem={handleSaveItem} />
     </main>
   )
 }
