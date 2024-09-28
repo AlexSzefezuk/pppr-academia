@@ -1,5 +1,14 @@
 import { useState } from "react"
 
+const Header = () => (
+  <header className="flex items-center gap-2 justify-center py-5 bg-[#2E4274]">
+    <img className="" src="./logo-espaco-mulher.png" alt="Logo Espaço mulher" />
+    <h1 className="text-[#E5C3A7] font-bold text-7xl leading-tight tracking-tight ">
+      Espaço Mulher
+    </h1>
+  </header>
+)
+
 const Form = ({ onItemsChange }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -99,6 +108,7 @@ const App = () => {
 
   return (
     <main>
+      <Header />
       <Form onItemsChange={handleItemsAdd} />
       <ItemsList
         items={items}
