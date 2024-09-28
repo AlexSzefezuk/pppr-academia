@@ -47,7 +47,7 @@ const Form = ({ onItemsChange }) => {
   )
 }
 
-const ItemsList = ({ items, onSaveItem }) => {
+const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
   return (
     <div className="w-full h-96 bg-[#E5C3A7]">
       <div className="flex justify-center items-center gap-12 flex-wrap mx-auto max-w-7xl text-white py-9">
@@ -58,7 +58,7 @@ const ItemsList = ({ items, onSaveItem }) => {
           >
             <input
               type="checkbox"
-              className="size-5"
+              className="size-5 hover: cursor-pointer"
               onClick={() => onSaveItem(item)}
             />
             <p className={item.saved && "font-normal text-[#5f68a0]"}>
@@ -71,7 +71,12 @@ const ItemsList = ({ items, onSaveItem }) => {
             >
               {item.item}
             </p>
-            <span>❌</span>
+            <span
+              className="hover: cursor-pointer"
+              onClick={() => onItemRemove(item.id)}
+            >
+              ❌
+            </span>
           </div>
         ))}
       </div>
@@ -86,11 +91,22 @@ const App = () => {
     setItems((i) =>
       i.map((i) => (i.id === item.id ? { ...item, saved: !item.saved } : item)),
     )
+  // const removeItem = (itemId = setItems((i) =>
+  //   i.filter((item) => item.id !== itemId),
+  // ))
+
+  const removeItem = (itemId) => {
+    setItems((i) => i.filter((item) => item.id !== itemId))
+  }
 
   return (
     <main>
       <Form onItemsChange={handleItemsAdd} />
-      <ItemsList items={items} onSaveItem={handleSaveItem} />
+      <ItemsList
+        items={items}
+        onSaveItem={handleSaveItem}
+        onItemRemove={removeItem}
+      />
     </main>
   )
 }
