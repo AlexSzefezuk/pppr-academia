@@ -58,9 +58,9 @@ const Form = ({ onItemsChange }) => {
   )
 }
 
-const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
+const ItemsList = ({ items, onSaveItem, onItemRemove, onClearList }) => {
   return (
-    <div className="w-full flex-1 bg-[#E5C3A7]">
+    <div className="w-full flex-1 flex items-center flex-col justify-between bg-[#E5C3A7]">
       <div className="flex justify-center items-center gap-12 flex-wrap mx-auto max-w-7xl text-white py-9">
         {items.map((item) => (
           <div
@@ -90,6 +90,14 @@ const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
             </span>
           </div>
         ))}
+      </div>
+      <div>
+        <button
+          className="py-3 mb-6 text-white px-2 w-36 bg-[#FF854A] rounded-lg hover:bg-[#ff7f3e] text-lg font-bold"
+          onClick={onClearList}
+        >
+          Limpar Lista
+        </button>
       </div>
     </div>
   )
@@ -126,8 +134,10 @@ const App = () => {
       ),
     )
 
-  const removeItem = (itemId) =>
+  const handleRemoveItem = (itemId) =>
     setItems((i) => i.filter((item) => item.id !== itemId))
+
+  const handleClearItems = () => setItems([])
 
   return (
     <main className="flex flex-col h-dvh">
@@ -136,7 +146,8 @@ const App = () => {
       <ItemsList
         items={items}
         onSaveItem={handleSaveItem}
-        onItemRemove={removeItem}
+        onItemRemove={handleRemoveItem}
+        onClearList={handleClearItems}
       />
       <Footer items={items} />
     </main>
