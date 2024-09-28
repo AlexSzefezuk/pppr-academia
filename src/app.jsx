@@ -58,7 +58,7 @@ const Form = ({ onItemsChange }) => {
 
 const ItemsList = ({ items, onSaveItem, onItemRemove }) => {
   return (
-    <div className="w-full h-screen bg-[#E5C3A7]">
+    <div className="w-full bg-[#E5C3A7]">
       <div className="flex justify-center items-center gap-12 flex-wrap mx-auto max-w-7xl text-white py-9">
         {items.map((item) => (
           <div
@@ -103,9 +103,13 @@ const Footer = ({ items }) => {
 
   return (
     <div className=" text-white flex items-center justify-center font-semibold text-2xl w-full h-28 bg-[#4B527E]">
-      <p>{`Você tem ${numberOfItems} ite${
-        SingularOrPlural ? "m" : "ns"
-      } e já guardou ${numberOfSavedItems} (${percentOfSavedItems}%)`}</p>
+      <p>
+        {numberOfItems === 0
+          ? "Você tem 0 itens na lista"
+          : `Você tem ${numberOfItems} ite${
+              SingularOrPlural ? "m" : "ns"
+            } e já guardou ${numberOfSavedItems} (${percentOfSavedItems}%)`}
+      </p>
     </div>
   )
 }
