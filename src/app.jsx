@@ -2,8 +2,12 @@ import { useState } from "react"
 
 const Header = () => (
   <header className="flex items-center gap-2 justify-center py-5 bg-[#2E4274]">
-    <img className="" src="./logo-espaco-mulher.png" alt="Logo Espaço mulher" />
-    <h1 className="text-[#E5C3A7] font-bold text-7xl leading-tight tracking-tight ">
+    <img
+      className="size-28"
+      src="./logo-espaco-mulher.png"
+      alt="Logo Espaço mulher"
+    />
+    <h1 className="text-[#E5C3A7] font-bold text-5xl leading-tight tracking-tight ">
       Espaço Mulher
     </h1>
   </header>
@@ -28,14 +32,14 @@ const Form = ({ onItemsChange }) => {
   return (
     <div className="w-full bg-[#4B527E]">
       <form
-        className="flex justify-center items-center gap-3 mx-auto max-w-7xl text-white py-7"
+        className="flex justify-center items-center gap-3 mx-auto max-w-7xl text-white py-5"
         onSubmit={handleSubmit}
       >
-        <p className="text-2xl text-center font-semibold">
+        <p className="text-xl text-center font-semibold">
           O que você precisa guardar?
         </p>
         <input
-          className="bg-[#7D81AE] py-3 px-2 w-20 rounded-lg outline-none text-center text-lg placeholder-gray-300/80"
+          className="bg-[#7D81AE] py-2 px-2 w-16 rounded-lg outline-none text-center text-lg placeholder-gray-300/80"
           name="number"
           type="Number"
           min={1}
@@ -43,14 +47,14 @@ const Form = ({ onItemsChange }) => {
           required
         />
         <input
-          className="bg-[#7D81AE] py-3 px-2 w-52 rounded-lg outline-none text-left text-lg placeholder-gray-300/80"
+          className="bg-[#7D81AE] py-2 px-2 w-44 rounded-lg outline-none text-left text-lg placeholder-gray-300/80"
           name="item"
           type="text"
           placeholder="Nome do item"
           required
         />
         <button
-          className="py-3 px-2 w-36 bg-[#FF6086] rounded-lg hover:bg-[#fc446f] text-lg font-bold"
+          className="py-2 px-2 w-32 bg-[#FF6086] rounded-lg hover:bg-[#fc446f] text-lg font-bold"
           type="submit"
         >
           Adicionar
@@ -141,7 +145,7 @@ const ItemsList = ({
       </div>
       <div>
         <select
-          className="bg-[#7D81AE] text-white py-3 mb-6 px-2 w-64 rounded-lg text-lg font-bold mr-4"
+          className="bg-[#7D81AE] text-white py-2 mb-6 px-2 w-64 rounded-lg text-lg font-bold mr-4"
           onChange={handleReOrderItems}
         >
           <option value="recent">Ordenar por mais recente</option>
@@ -151,7 +155,7 @@ const ItemsList = ({
         </select>
 
         <button
-          className="py-3 mb-6 text-white px-2 w-36 bg-[#FF854A] rounded-lg hover:bg-[#ff7f3e] text-lg font-bold"
+          className="py-2 mb-6 text-white px-2 w-36 bg-[#FF854A] rounded-lg hover:bg-[#ff7f3e] text-lg font-bold"
           onClick={onClearList}
         >
           Limpar Lista
@@ -170,7 +174,7 @@ const Footer = ({ items }) => {
   const SingularOrPlural = numberOfItems === 1 ? true : false
 
   return (
-    <div className=" text-white flex items-center justify-center font-semibold text-2xl w-full min-h-28 bg-[#4B527E]">
+    <div className=" text-white flex items-center justify-center font-semibold text-xl w-full min-h-20 bg-[#4B527E]">
       <p>
         {numberOfItems === 0
           ? "Você tem 0 itens na lista"
