@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import localForage from 'localforage'
 
 const Header = () => (
   <header className="flex items-center gap-2 justify-center py-5 bg-[#2E4274]">
@@ -175,7 +176,7 @@ const Footer = ({ items }) => {
   const SingularOrPlural = numberOfItems === 1 ? true : false
 
   return (
-    <div className=" text-white flex items-center justify-center font-semibold text-xl w-full min-h-20 bg-[#4B527E]">
+    <div className="text-white flex items-center justify-center font-semibold text-xl w-full min-h-20 bg-[#4B527E]">
       <p>
         {numberOfItems === 0
           ? "Você tem 0 itens na lista"
@@ -192,12 +193,29 @@ const App = () => {
   const formRef = useRef(null)
   
   useEffect(() => {
+    localForage.getItem('items')
+      .then(items => {
+        if(items) {
+          setItems(items)
+        }
+      })
+      .catch(error => alert(error.message))
+  }, [])
+
+  useEffect(() => {
+    localForage.setItem('items', items)
+      .catch(error => alert(error.message))
+  }, [items])
+
+  useEffect(() => {
     if (items.length === 0) {
       return
     }
   
     formRef.current.reset()
   }, [items])
+
+
 
   const handleItemsAdd = (newItem) => setItems((i) => [...i, newItem])
   const handleSaveItem = (itemId) =>
