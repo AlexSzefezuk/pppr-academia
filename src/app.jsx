@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const Header = () => (
   <header className="flex items-center gap-2 justify-center py-5 bg-[#2E4274]">
@@ -13,7 +13,7 @@ const Header = () => (
   </header>
 )
 
-const Form = ({ onItemsChange }) => {
+const Form = ({ onItemsChange, formRef }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -32,6 +32,7 @@ const Form = ({ onItemsChange }) => {
   return (
     <div className="w-full bg-[#4B527E]">
       <form
+        ref={formRef}
         className="flex justify-center items-center gap-3 mx-auto max-w-7xl text-white py-5"
         onSubmit={handleSubmit}
       >
@@ -188,6 +189,16 @@ const Footer = ({ items }) => {
 
 const App = () => {
   const [items, setItems] = useState([])
+  const formRef = useRef(null)
+  
+  useEffect(() => {
+    if (items.length === 0) {
+      return
+    }
+  
+    formRef.current.reset()
+  }, [items])
+
   const handleItemsAdd = (newItem) => setItems((i) => [...i, newItem])
   const handleSaveItem = (itemId) =>
     setItems((i) =>
@@ -206,7 +217,7 @@ const App = () => {
   return (
     <main className="flex flex-col h-dvh">
       <Header />
-      <Form onItemsChange={handleItemsAdd} />
+      <Form onItemsChange={handleItemsAdd} formRef={formRef} />
       <ItemsList
         items={items}
         onSaveItem={handleSaveItem}
